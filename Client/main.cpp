@@ -8,6 +8,7 @@
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
+HWND    g_hWnd; //메인 윈도우 핸들
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
@@ -43,6 +44,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
+    //SetTimer(g_hWnd, 10, 0, nullptr); 
+
     // 기본 메시지 루프입니다:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
@@ -52,6 +55,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
     }
+
+    //KillTimer(g_hWnd, 10);
 
     return (int) msg.wParam;
 }
@@ -98,16 +103,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-   if (!hWnd)
+   if (!g_hWnd)
    {
       return FALSE;
    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+   ShowWindow(g_hWnd, nCmdShow);
+   UpdateWindow(g_hWnd);
 
    return TRUE;
 }
@@ -123,8 +128,28 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //
 
-POINT g_ptObjPos = { 100, 100 };
-POINT g_ptObjScale = { 100, 100 };
+
+
+#include <vector>
+
+using std::vector;
+
+struct tObjInfo
+{
+POINT g_ptObjPos;
+POINT g_ptObjScale;
+};
+
+vector<tObjInfo> g_vecInfo;
+
+
+// 좌 상단
+POINT g_ptLT;
+
+// 우 하단
+POINT g_ptRB;
+
+bool bLbtnDown = false;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -166,11 +191,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             HBRUSH hDefaultBrush = (HBRUSH)SelectObject(hdc, hBlueBrush);
 
             // 변경된 펜으로 사각형 그림
-            Rectangle(hdc
-                , g_ptObjPos.x - g_ptObjScale.x / 2
-                , g_ptObjPos.y - g_ptObjScale.y / 2
-                , g_ptObjPos.x + g_ptObjScale.x / 2
-                , g_ptObjPos.y + g_ptObjScale.y / 2);
+            if (bLbtnDown)
+            {
+                Rectangle(hdc
+                    , g_ptLT.x , g_ptLT.y
+                    , g_ptRB.x, g_ptRB.y);
+            }
+
+            // 추가된 사각형들도 그려준다.
+            for (size_t i = 0; i < g_vecInfo.size(); ++i)
+            {
+                Rectangle(hdc
+                    , g_vecInfo[i].g_ptObjPos.x - g_vecInfo[i].g_ptObjScale.x / 2
+                    , g_vecInfo[i].g_ptObjPos.y - g_vecInfo[i].g_ptObjScale.y / 2
+                    , g_vecInfo[i].g_ptObjPos.x + g_vecInfo[i].g_ptObjScale.x / 2
+                    , g_vecInfo[i].g_ptObjPos.y + g_vecInfo[i].g_ptObjScale.y / 2);
+            }
 
             // DC 의 펜을 원래 펜으로 되돌림
             SelectObject(hdc, hDefaultPen);
@@ -190,16 +226,63 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         switch (wParam)
         {
         case VK_UP:
-            g_ptObjPos.y -= 10;
+            //g_ptObjPos.y -= 10;
+            InvalidateRect(hWnd, nullptr, true);
+            break;
+
+        case VK_DOWN:
+            //g_ptObjPos.y += 10;
+            InvalidateRect(hWnd, nullptr, true);
+            break;
+
+        case VK_LEFT:
+            //g_ptObjPos.x -= 10;
+            InvalidateRect(hWnd, nullptr, true);
+            break;
+
+        case VK_RIGHT:
+            //g_ptObjPos.x += 10;
             InvalidateRect(hWnd, nullptr, true);
             break;
         }
     }
-    case WM_LBUTTONUP:
+    case WM_LBUTTONDOWN:
     {
-        POINT pt = { LOWORD(lParam), HIWORD(lParam) };
+        g_ptLT.x = LOWORD(lParam);
+        g_ptLT.y = HIWORD(lParam);
+        bLbtnDown = true;
     }
         break;
+
+    case WM_MOUSEMOVE:
+        g_ptRB.x = LOWORD(lParam);
+        g_ptRB.y = HIWORD(lParam);
+        InvalidateRect(hWnd, nullptr, true);
+        break;
+
+    case WM_LBUTTONUP:
+    {
+        tObjInfo info = {};
+        info.g_ptObjPos.x = (g_ptLT.x + g_ptRB.x) / 2;
+        info.g_ptObjPos.y= (g_ptLT.y + g_ptRB.y) / 2;
+
+        info.g_ptObjScale.x = abs(g_ptLT.x - g_ptRB.x);
+        info.g_ptObjScale.y = abs(g_ptLT.y - g_ptRB.y);
+
+        g_vecInfo.push_back(info);
+        bLbtnDown = false;
+        InvalidateRect(hWnd, nullptr, true);
+    }
+        break;
+
+    case WM_TIMER:
+    {
+        int a = 0;
+    }
+        
+        
+        break;
+
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
