@@ -18,6 +18,44 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
+// 지역
+// 전역 
+// 정적 (데이터 영역)
+// 1. 함수 안에
+// 2. 파일
+// 3. 클래스 안에
+// 
+// 외부
+
+
+class CClass
+{
+private:
+	int m_i;
+
+public:
+	static int m_iStatic; // 정적 멤버 (데이터 영역)
+
+public:
+	void func()
+	{
+		m_i;
+		m_iStatic = 0;
+	}
+
+	// 정적 멤버함수, 객체없이 호출 가능, this 가 없다(멤버 접근 불가), 정적 멤버는 접근 가능
+	static void FUNC()
+	{
+		m_iStatic = 0;
+	}
+};
+
+int CClass::m_iStatic = 0;
+
+
+
+
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPWSTR    lpCmdLine,
@@ -27,6 +65,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// TODO: 여기에 코드를 입력합니다.
+	CClass a;
+	a.func();
+	a.FUNC();
+
+	CClass::FUNC();
+
+	CClass::m_iStatic = 0;
+
+
 
 	// 전역 문자열을 초기화합니다.
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -43,11 +90,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CLIENT));
 
 	MSG msg;
-
-	//SetTimer(g_hWnd, 10, 0, nullptr); 
-
-	// 기본 메시지 루프입니다:
-
 	//GetMessage
 	// 메세지큐에서 메세지 확인 될 때까지 대기
 	// msg.message == WM_QUIT 인 경우 false 를 반환 -> 프로그램 종료
@@ -55,56 +97,28 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// PeekMessage
 	// 메세지 유무와 관계없이 반환
 	// 메세지큐에서 메세지를 확인한 경우 true, 메세지큐에 메세지가 없는 경우 false 를 반환한다.
-
-	DWORD dwPrevCount = GetTickCount(); // 프로그램이 시작되면은 초당 1000씩 카운팅함. 
-	//그러나 메세지 처리 시간이 더 빨리 일어날 수 있기 때문에 밑에 코드에서 1/1000보다 빠르면 세지 못함
-
-
-	DWORD dwAccCount = 0; // 누적 카운트
 	while (true)
 	{
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
-			int iTime = GetTickCount();
-
 			if (WM_QUIT == msg.message)
 				break;
-
 
 			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
 			{
 				TranslateMessage(&msg);
 				DispatchMessage(&msg);
 			}
-
-			int iAdd = (GetTickCount() - iTime);
-			dwAccCount += iAdd;
 		}
 
 		// 메세지가 발생하지 않는 대부분의 시간
 		else
 		{
-			DWORD dwCurCount = GetTickCount();
-			if (dwCurCount - dwPrevCount > 1000)
-			{
-				float fRatio = (float)dwAccCount / 1000.f;
-
-				wchar_t szBuff[50] = {};
-
-				swprintf_s(szBuff, L"비율 : %f", fRatio);
-				SetWindowText(g_hWnd, szBuff);
-
-				dwPrevCount = dwCurCount;
-				dwAccCount = 0;
-			}
-
 			// Game 코드 수행
 			// 디자인 패턴(설계 유형)
 			// 싱글톤 패턴
 		}
 	}
-
-	//KillTimer(g_hWnd, 10);
 
 	return (int)msg.wParam;
 }
