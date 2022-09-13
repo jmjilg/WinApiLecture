@@ -17,6 +17,12 @@
     <Filter Include="Engine\01. Header">
       <UniqueIdentifier>{0d44b9ae-4d71-481a-92f2-d275483dbbeb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Manager">
+      <UniqueIdentifier>{2999ec53-a5f4-4f65-86df-4ce12a6e5b90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Manager\KeyMgr">
+      <UniqueIdentifier>{819352b3-51e2-4392-b7c2-2e95df2807cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h">
@@ -34,6 +40,13 @@
     <ClInclude Include="targetver.h">
       <Filter>Default</Filter>
     </ClInclude>
+    <ClInclude Include="define.h">
+      <Filter>Engine\01. Header</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>Engine\03. Manager\KeyMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -52,8 +65,9 @@
     <ClCompile Include="CCore.cpp">
       <Filter>Engine\02. Core</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Default</Filter>
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>Engine\03. Manager\KeyMgr</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
 </Project>

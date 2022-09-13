@@ -1,6 +1,7 @@
 ﻿// Client.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
-
+#include "CCore.h"
+#include "pch.h"
 #include "framework.h"
 #include "Client.h"
 
@@ -53,7 +54,12 @@ public:
 int CClass::m_iStatic = 0;
 
 
+int Add(int a, int b)
+{
+	return a + b;
+}
 
+#define ADD(a, b) a + b
 
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -73,18 +79,32 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	CClass::m_iStatic = 0;
 
+	int iCal = ADD(10, 10);
+	iCal = 10 * Add(10, 20);
+
 
 
 	// 전역 문자열을 초기화합니다.
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 	LoadStringW(hInstance, IDC_CLIENT, szWindowClass, MAX_LOADSTRING);
+
+	// 윈도우 정보 등록
 	MyRegisterClass(hInstance);
 
-	// 애플리케이션 초기화를 수행합니다:
+	// 윈도우 생성
 	if (!InitInstance(hInstance, nCmdShow))
 	{
 		return FALSE;
 	}
+
+	// Core 초기화
+	if (FAILED(CCore::GetInst()->Init(g_hWnd, POINT{ 1280, 768 })))
+	{
+		MessageBox(nullptr, L"Core 객체 초기화 실패", L"ERROR", MB_OK);
+
+		return FALSE;
+	}
+
 
 	// 단축키 테이블 정보 로딩
 	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_CLIENT));
@@ -117,6 +137,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			// Game 코드 수행
 			// 디자인 패턴(설계 유형)
 			// 싱글톤 패턴
+			CCore::GetInst()->progress();
 		}
 	}
 
