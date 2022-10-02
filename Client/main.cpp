@@ -292,3 +292,7 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 	return (INT_PTR)FALSE;
 }
+
+
+// 1. 플레이어 미사일 종류 추가
+// 2. 몬스터도 미사일 패턴 추가

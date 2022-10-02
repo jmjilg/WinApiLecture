@@ -101,7 +101,9 @@
     <ClInclude Include="CMonster.h">
       <Filter>Engine\04. Object\CMonster</Filter>
     </ClInclude>
-    <ClInclude Include="CMissile.h" />
+    <ClInclude Include="CMissile.h">
+      <Filter>Engine\04. Object\Missile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -145,6 +147,8 @@
     <ClCompile Include="CMonster.cpp">
       <Filter>Engine\04. Object\CMonster</Filter>
     </ClCompile>
-    <ClCompile Include="CMissile.cpp" />
+    <ClCompile Include="CMissile.cpp">
+      <Filter>Engine\04. Object\Missile</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
