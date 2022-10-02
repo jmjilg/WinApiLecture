@@ -40,7 +40,6 @@ void CSceneMgr::Init()
 void CSceneMgr::update()
 {
 	m_pCurScene->update();
-	//m_pCurScene->Enter(); 잘못 쓴 코드
 }
 
 void CSceneMgr::render(HDC _dc)
