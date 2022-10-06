@@ -2,7 +2,6 @@
 
 
 // 미리 컴파일된 헤더
-
 #include <Windows.h>
 #include <iostream>
 
@@ -12,6 +11,8 @@ using std::vector;
 #include <string>
 using std::string;
 using std::wstring;
+
+#include <math.h>
 
 #include "define.h"
 #include "struct.h"
