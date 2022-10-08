@@ -5,6 +5,25 @@ struct Vec2 // 크기와 방향을 나타내는 의미의 벡터
 	float x;
 	float y;
 
+
+public:
+	float Length()
+	{
+		return sqrt(x * x + y * y);
+	}
+
+	Vec2& Normalize()
+	{
+		float fLen = Length();
+		
+		assert(fLen != 0.f);
+
+		x /= fLen; 
+		y /= fLen;
+
+		return *this;
+	}
+
 public:
 	Vec2& operator = (POINT _pt)
 	{
