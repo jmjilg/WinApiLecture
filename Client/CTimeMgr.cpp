@@ -19,7 +19,7 @@ CTimeMgr::~CTimeMgr()
 
 }
 
-void CTimeMgr::Init()
+void CTimeMgr::init()
 {
 	// 현재 카운트 
 	QueryPerformanceCounter(&m_llPrevCount);
@@ -38,7 +38,10 @@ void CTimeMgr::update()
 
 	// 이전 카운트 값을 현재값으로 갱신(다음번에 계산을 위해서)
 	m_llPrevCount = m_llCurCount;
+}
 
+void CTimeMgr::render()
+{
 	++m_iCallCount;
 	m_dAcc += m_dDT; // DT 누적, 흘러간 시간을 의미
 

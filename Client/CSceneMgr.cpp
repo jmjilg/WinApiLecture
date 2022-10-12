@@ -22,7 +22,7 @@ CSceneMgr::~CSceneMgr()
 	}
 }
 
-void CSceneMgr::Init()
+void CSceneMgr::init()
 {
 	// Scene »ý¼º
 	m_arrScene[(UINT)SCENE_TYPE::START] = new CScene_Start;

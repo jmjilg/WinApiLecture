@@ -4,8 +4,7 @@
 #include "CTimeMgr.h"
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
-
-#include "CObject.h"
+#include "CPathMgr.h"
 
 
 CCore::CCore()
@@ -48,9 +47,10 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 
 
 	// Manager ÃÊ±âÈ­
-	CTimeMgr::GetInst()->Init();
-	CKeyMgr::GetInst()->Init();
-	CSceneMgr::GetInst()->Init();
+	CPathMgr::GetInst()->init();
+	CTimeMgr::GetInst()->init();
+	CKeyMgr::GetInst()->init();
+	CSceneMgr::GetInst()->init();
 
 	return S_OK;
 }
@@ -75,5 +75,7 @@ void CCore::progress()
 
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y
 		, m_memDC, 0, 0, SRCCOPY);
+
+	//CTimeMgr::GetInst()->render();
 }
 

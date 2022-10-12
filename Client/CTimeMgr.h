@@ -16,8 +16,9 @@ private:
 	// FPS
 	// 1 프레임당 시간 (Delta Time)
 public:
-	void Init();
+	void init();
 	void update();
+	void render();
 
 public:
 	double GetDT() { return m_dDT; }

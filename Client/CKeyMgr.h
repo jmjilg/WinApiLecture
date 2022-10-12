@@ -66,7 +66,7 @@ private:
 	vector<tKeyInfo> m_vecKey;
 
 public:
-	void Init();
+	void init();
 	void update();
 
 public:

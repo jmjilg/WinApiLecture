@@ -51,7 +51,7 @@ CKeyMgr::~CKeyMgr()
 
 }
 
-void CKeyMgr::Init()
+void CKeyMgr::init()
 {
 	for (int i = 0; i < (int)KEY::LAST; ++i)
 	{
