@@ -22,14 +22,7 @@ CScene_Start::~CScene_Start()
 
 void CScene_Start::Enter()
 {
-	// Texture 로딩하기
-	CTexture* pTex = new CTexture;
 
-	wstring strFilepath = CPathMgr::GetInst()->GetContentPath();
-	strFilepath += L"texture\\Player.bmp";
-	pTex->Load(strFilepath);
-
-	delete pTex;
 	
 
 	// Object 추가
