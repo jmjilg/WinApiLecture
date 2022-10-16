@@ -9,7 +9,7 @@
 
 // 전역 변수:
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
-HWND    g_hWnd; //메인 윈도우 핸들
+HWND    g_hWnd; //메인윈도우 핸들
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
@@ -19,70 +19,19 @@ BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-// 지역
-// 전역 
-// 정적 (데이터 영역)
-// 1. 함수 안에
-// 2. 파일
-// 3. 클래스 안에
-// 
-// 외부
-
-
-class CClass
-{
-private:
-	int m_i;
-
-public:
-	static int m_iStatic; // 정적 멤버 (데이터 영역)
-
-public:
-	void func()
-	{
-		m_i;
-		m_iStatic = 0;
-	}
-
-	// 정적 멤버함수, 객체없이 호출 가능, this 가 없다(멤버 접근 불가), 정적 멤버는 접근 가능
-	static void FUNC()
-	{
-		m_iStatic = 0;
-	}
-};
-
-int CClass::m_iStatic = 0;
-
-
-int Add(int a, int b)
-{
-	return a + b;
-}
-
-#define ADD(a, b) a + b
-
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPWSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
+	// 메모리 릭(누수) 체크
+
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	//_CrtSetBreakAlloc(215);
+
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
-
-	// TODO: 여기에 코드를 입력합니다.
-	CClass a;
-	a.func();
-	a.FUNC();
-
-	CClass::FUNC();
-
-	CClass::m_iStatic = 0;
-
-	int iCal = ADD(10, 10);
-	iCal = 10 * Add(10, 20);
-
-
 
 	// 전역 문자열을 초기화합니다.
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
