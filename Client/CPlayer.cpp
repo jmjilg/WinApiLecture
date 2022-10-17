@@ -17,7 +17,9 @@ CPlayer::CPlayer()
 	: m_pTex(nullptr)
 {
 	// Texture 로딩하기
-	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");	
+	m_pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\Player.bmp");
+
+	CreateCollider();
 }
 
 CPlayer::~CPlayer()

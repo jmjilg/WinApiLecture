@@ -15,6 +15,7 @@ public:
 
 
 	void update();
+	void finalupdate();
 	void render(HDC _dc);
 
 
