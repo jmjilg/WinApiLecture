@@ -5,7 +5,7 @@
 #include "CKeyMgr.h"
 #include "CSceneMgr.h"
 #include "CPathMgr.h"
-
+#include "CCollisionMgr.h"
 
 CCore::CCore()
 	:m_hWnd(0)
@@ -72,6 +72,7 @@ void CCore::progress()
 	CKeyMgr::GetInst()->update();
 
 	CSceneMgr::GetInst()->update();
+	CCollisionMgr::GetInst()->update();
 
 
 	// ==========
@@ -85,7 +86,7 @@ void CCore::progress()
 	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y
 		, m_memDC, 0, 0, SRCCOPY);
 
-	//CTimeMgr::GetInst()->render();
+	CTimeMgr::GetInst()->render();
 }
 
 void CCore::CreateBrushPen()

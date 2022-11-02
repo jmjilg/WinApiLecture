@@ -13,7 +13,6 @@
 #include "CTexture.h"
 #include "CCollider.h"
 
-
 CPlayer::CPlayer()
 	: m_pTex(nullptr)
 {
@@ -22,7 +21,8 @@ CPlayer::CPlayer()
 
 
 	CreateCollider();
-	GetCollider()->SetScale(Vec2(100.f, 100.f));
+	GetCollider()->SetOffsetPos(Vec2(0.f, 12.f));
+	GetCollider()->SetScale(Vec2(20.f, 40.f));
 }
 
 CPlayer::~CPlayer()

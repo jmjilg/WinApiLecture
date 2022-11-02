@@ -25,10 +25,10 @@
 
 enum class GROUP_TYPE
 {
-	DEFAULT, 
-	PLAYER,
-	MISSILE,
-	MONSTER,
+	DEFAULT, // 0
+	PLAYER,  // 1
+	MISSILE, // 2
+	MONSTER, // 3
 
 
 	END = 32,
