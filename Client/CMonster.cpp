@@ -38,3 +38,10 @@ void CMonster::update()
 	SetPos(vCurPos);
 }
 
+
+void CMonster::OnCollisionEnter(CCollider* _pOther)
+{
+	CObject* pOtherObj = _pOther->GetObj();
+
+
+}
