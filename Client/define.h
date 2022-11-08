@@ -27,8 +27,9 @@ enum class GROUP_TYPE
 {
 	DEFAULT, // 0
 	PLAYER,  // 1
-	MISSILE, // 2
-	MONSTER, // 3
+	MONSTER,
+	PROJ_PLAYER, 
+	PROJ_MONSTER, 
 
 
 	END = 32,

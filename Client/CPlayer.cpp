@@ -99,6 +99,5 @@ void CPlayer::CreateMissile()
 	pMissile->SetScale(Vec2(25.f, 25.f));
 	pMissile->SetDir(Vec2(0.f, -1.f));
 	
-	CScene* pCurScene = CSceneMgr::GetInst()->GetCurScene();
-	pCurScene->AddObject(pMissile, GROUP_TYPE::DEFAULT);
+	CreateObject(pMissile, GROUP_TYPE::PROJ_PLAYER); // 앞으로 생성될 모든 종류의 오브젝트를 커버할 수 있어야함
 }
