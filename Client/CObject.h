@@ -46,8 +46,12 @@ public:
 
 	void component_render(HDC _dc);
 
+
+	virtual CObject* Clone() = 0;
+
 public:
 	CObject();
+	CObject(const CObject& _origin);
 	virtual ~CObject();
 	
 	friend class CEventMgr;

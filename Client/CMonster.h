@@ -24,6 +24,8 @@ public:
 public:
     virtual void update();
 
+
+    CLONE(CMonster);
 public:
     CMonster();
     ~CMonster();
