@@ -1,6 +1,7 @@
 #pragma once
 
 
+
 class CRes
 {
 private:
@@ -16,6 +17,6 @@ public:
 
 public:
 	CRes();
-	~CRes();
+	virtual ~CRes();
 };
 
