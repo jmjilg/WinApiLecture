@@ -7,7 +7,7 @@ class CPlayer :
     public CObject
 {
 private:
-    CTexture* m_pTex;
+    
 
 public:
     virtual void update();

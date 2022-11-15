@@ -45,9 +45,10 @@ void CScene_Start::Enter()
 
 	/*CObject* pOtherPlayer = new CPlayer(*(CPlayer*)pObj);
 	pOtherPlayer->SetPos(Vec2(740.f, 384.f)); ¾Æ·¡·Î ¹Ù²ñ */
-	CObject* pOtherPlayer = pObj->Clone();
-	pOtherPlayer->SetPos(Vec2(740.f, 384.f));
-	AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
+
+	//CObject* pOtherPlayer = pObj->Clone();
+	//pOtherPlayer->SetPos(Vec2(740.f, 384.f));
+	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
 
 
 
