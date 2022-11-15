@@ -13,6 +13,7 @@
 #include "CTexture.h"
 #include "CCollider.h"
 #include "CAnimator.h"
+#include "CAnimation.h"
 
 CPlayer::CPlayer()
 {
@@ -24,13 +25,16 @@ CPlayer::CPlayer()
 	GetCollider()->SetOffsetPos(Vec2(0.f, 12.f));
 	GetCollider()->SetScale(Vec2(20.f, 40.f));
 
-
 	// Texture 로딩하기
 	CTexture* pTex = CResMgr::GetInst()->LoadTexture(L"PlayerTex", L"texture\\link_0.bmp");
 
 	CreateAnimator();	
 	GetAnimator()->CreateAnimation(L"WALK_DOWN", pTex, Vec2(0.f, 520.f), Vec2(120.f, 130.f), Vec2(120.f, 0.f), 0.1f, 10);
 	GetAnimator()->Play(L"WALK_DOWN", true);
+
+	CAnimation* pAnim = GetAnimator()->FindAnimation(L"WALK_DOWN");
+	for (int i = 0; i < pAnim->GetMaxFrame(); ++i)
+		pAnim->GetFrame(i).vOffset = Vec2(0.f, -20.f);
 }
 
 CPlayer::~CPlayer()
