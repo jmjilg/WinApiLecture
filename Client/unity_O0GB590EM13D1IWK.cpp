@@ -23,6 +23,9 @@
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CTexture.cpp"
 
 
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CTile.cpp"
+
+
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CTimeMgr.cpp"
 
 
