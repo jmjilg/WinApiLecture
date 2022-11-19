@@ -37,3 +37,6 @@
 
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CPlayer.cpp"
 
+
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CRes.cpp"
+

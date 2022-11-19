@@ -9,6 +9,7 @@
 #include "CSceneMgr.h"
 
 #include "resource.h"
+#include "CUI.h"
 
 CScene_Tool::CScene_Tool()
 {
@@ -23,8 +24,22 @@ void CScene_Tool::Enter()
 	// 타일 생성
 	CreateTile(5, 5);
 
-	// Camera Look 지정
+	// UI 하나 만들어보기
 	Vec2 vResolution = CCore::GetInst()->GetResolution();
+
+	CUI* pUI = new CUI;
+	pUI->SetScale(Vec2(500.f, 300.f));
+	pUI->SetPos(Vec2(vResolution.x - pUI->GetScale().x, 0.f));
+
+	CUI* pChildUI = new CUI;
+	pChildUI->SetScale(Vec2(100.f, 40.f));
+	pChildUI->SetPos(Vec2(0.f, 0.f));
+
+	pUI->AddChild(pChildUI);
+
+	AddObject(pUI, GROUP_TYPE::UI);
+
+	// Camera Look 지정
 	CCamera::GetInst()->SetLookAt(vResolution / 2.f);
 }
 
@@ -47,11 +62,17 @@ void CScene_Tool::SetTileIdx()
 		Vec2 vMousePos = MOUSE_POS;
 		vMousePos = CCamera::GetInst()->GetRealPos(vMousePos);
 
-		UINT iTileX = GetTileX();
-		UINT iTileY = GetTileY();
+		int iTileX = (int)GetTileX();
+		int iTileY = (int)GetTileY();
 
-		UINT iCol = (UINT)vMousePos.x / TILE_SIZE;
-		UINT iRow = (UINT)vMousePos.y / TILE_SIZE;
+		int iCol = (int)vMousePos.x / TILE_SIZE;
+		int iRow = (int)vMousePos.y / TILE_SIZE;
+
+		if (vMousePos.x < 0.f || iTileX <= iCol
+			|| vMousePos.y < 0.f || iTileY <= iRow)
+		{
+			return;
+		}
 
 		UINT iIdx = iRow * iTileX + iCol;
 

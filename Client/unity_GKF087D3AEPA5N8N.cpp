@@ -1,7 +1,4 @@
 
-#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CRes.cpp"
-
-
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CResMgr.cpp"
 
 
@@ -27,6 +24,9 @@
 
 
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CTimeMgr.cpp"
+
+
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CUI.cpp"
 
 
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\func.cpp"
