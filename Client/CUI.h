@@ -19,6 +19,7 @@ public:
     bool IsMouseOn() { return m_bMouseOn; }
 
     void AddChild(CUI* _pUI) { m_vecChildUI.push_back(_pUI); _pUI->m_pParentUI = this; }
+    const vector<CUI*>& GetChildUI() { return m_vecChildUI; }
 public:
     virtual void update();
     virtual void finalupdate();
