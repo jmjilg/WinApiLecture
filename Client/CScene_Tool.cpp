@@ -9,6 +9,8 @@
 #include "CSceneMgr.h"
 
 #include "resource.h"
+
+#include "CUIMgr.h"
 #include "CPanelUI.h"
 #include "CBtnUI.h"
 
@@ -46,6 +48,8 @@ void CScene_Tool::Enter()
 	pClonePanel->SetPos(pClonePanel->GetPos() + Vec2(-300.f, 0.f));
 	AddObject(pClonePanel, GROUP_TYPE::UI);
 
+	m_pUI = pClonePanel;
+
 	// Camera Look ÁöÁ¤
 	CCamera::GetInst()->SetLookAt(vResolution / 2.f);
 }
@@ -59,6 +63,11 @@ void CScene_Tool::update()
 	CScene::update();
 
 	SetTileIdx();
+
+	if (KEY_TAP(KEY::LSHIFT))
+	{
+		CUIMgr::GetInst()->SetFocusedUI(m_pUI);
+	}
 }
 
 
