@@ -72,12 +72,13 @@ void CScene_Tool::update()
 	if (KEY_TAP(KEY::LSHIFT))
 	{
 		//CUIMgr::GetInst()->SetFocusedUI(m_pUI);
-		SaveTile(L"tile\\Test.tile");
+
+		SaveTileData();
 	}
 
 	if (KEY_TAP(KEY::CTRL))
 	{
-		LoadTile(L"tile\\Test.tile");
+		LoadTileData();
 	}
 }
 
@@ -110,14 +111,71 @@ void CScene_Tool::SetTileIdx()
 
 }
 
-void CScene_Tool::SaveTile(const wstring& _strRelativePath)
+void CScene_Tool::SaveTileData()
 {
-	wstring strFilePath = CPathMgr::GetInst()->GetContentPath();
-	strFilePath += _strRelativePath;
+	wchar_t szName[256] = {};
 
+	OPENFILENAME ofn = {};
+
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = CCore::GetInst()->GetMainHwnd(); // 열릴 창, 부모 윈도우
+	ofn.lpstrFile = szName;		// 완성된 경로가 채워질 곳
+	ofn.nMaxFile = sizeof(szName);		// 방금 지정한 배열의 최대 길이(배열의 크기)
+	ofn.lpstrFilter = L"ALL\0*.*\0Tile\0*.tile";		// 특정 확장자명 파일만 보여주기 ALL은 필터에서 노출되는 녀석이지 모든 파일이 다 보이는 건 아님 다 보이려면 \0*.* 이걸 붙여야 됨
+	ofn.nFilterIndex = 0;		// 내가 골라놓은 것 중에 초기 필터를 뭘로 세팅해놓을까를 말하는 것
+	ofn.lpstrFileTitle = nullptr;
+	ofn.nMaxFileTitle = 0;
+	
+	wstring strTileFolder = CPathMgr::GetInst()->GetContentPath();
+	strTileFolder += L"tile";
+
+	ofn.lpstrInitialDir = strTileFolder.c_str();		// 초기 경로
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;		// 경로가 반드시 존재해야 함
+	
+	// Modal 방식임
+	if (GetSaveFileName(&ofn)) // 인자 정보를 토대로 창을 엶
+	{
+		CPathMgr::GetInst()->GetRelativePath(szName);
+		SaveTile(szName);
+	}
+
+}
+
+void CScene_Tool::LoadTileData()
+{
+	wchar_t szName[256] = {};
+
+	OPENFILENAME ofn = {};
+
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = CCore::GetInst()->GetMainHwnd(); // 열릴 창, 부모 윈도우
+	ofn.lpstrFile = szName;		// 완성된 경로가 채워질 곳
+	ofn.nMaxFile = sizeof(szName);		// 방금 지정한 배열의 최대 길이(배열의 크기)
+	ofn.lpstrFilter = L"ALL\0*.*\0Tile\0*.tile";		// 특정 확장자명 파일만 보여주기 ALL은 필터에서 노출되는 녀석이지 모든 파일이 다 보이는 건 아님 다 보이려면 \0*.* 이걸 붙여야 됨
+	ofn.nFilterIndex = 0;		// 내가 골라놓은 것 중에 초기 필터를 뭘로 세팅해놓을까를 말하는 것
+	ofn.lpstrFileTitle = nullptr;
+	ofn.nMaxFileTitle = 0;
+
+	wstring strTileFolder = CPathMgr::GetInst()->GetContentPath();
+	strTileFolder += L"tile";
+
+	ofn.lpstrInitialDir = strTileFolder.c_str();		// 초기 경로
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;		// 경로가 반드시 존재해야 함
+
+	// Modal 방식임
+	if (GetOpenFileName(&ofn)) // 인자 정보를 토대로 창을 엶
+	{
+		// 어차피 이 안에서 절대경로를 다시 붙여주니까 상대경로만 주면 됨
+		wstring strRelativePath = CPathMgr::GetInst()->GetRelativePath(szName);
+		LoadTile(strRelativePath);
+	}
+}
+
+void CScene_Tool::SaveTile(const wstring& _strFilePath)
+{
 	// 커널 오브젝트
 	FILE* pFile = nullptr;
-	_wfopen_s(&pFile, strFilePath.c_str(), L"wb");
+	_wfopen_s(&pFile, _strFilePath.c_str(), L"wb");
 
 	assert(pFile);
 
