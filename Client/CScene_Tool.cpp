@@ -43,13 +43,14 @@ void CScene_Tool::Enter()
 	pBtnUI->SetName(L"ChildUI");
 	pBtnUI->SetScale(Vec2(100.f, 40.f));
 	pBtnUI->SetPos(Vec2(0.f, 0.f));
+	((CBtnUI*)pBtnUI)->SetClickedCallBack(this, (SCENE_MEMFUNC)&CScene_Tool::SaveTileData);
 	pPanelUI->AddChild(pBtnUI);
 	AddObject(pPanelUI, GROUP_TYPE::UI);
 
 	// º¹»çºÐ UI
 	//CUI* pClonePanel = pPanelUI->Clone();
 	//pClonePanel->SetPos(pClonePanel->GetPos() + Vec2(-300.f, 0.f));
-	//((CBtnUI*)pClonePanel->GetChildUI()[0])->SetClickedCallBack(ChangeScene, 0, 0);
+	//((CBtnUI*)pClonePanel->GetChildUI()[0])->SetClickedCallBack(&ChangeScene, 0, 0);
 	//AddObject(pClonePanel, GROUP_TYPE::UI);
 
 	//m_pUI = pClonePanel;
@@ -69,12 +70,12 @@ void CScene_Tool::update()
 
 	SetTileIdx();
 
-	if (KEY_TAP(KEY::LSHIFT))
-	{
-		//CUIMgr::GetInst()->SetFocusedUI(m_pUI);
+	//if (KEY_TAP(KEY::LSHIFT))
+	//{
+	//	//CUIMgr::GetInst()->SetFocusedUI(m_pUI);
 
-		SaveTileData();
-	}
+	//	SaveTileData();
+	//}
 
 	if (KEY_TAP(KEY::CTRL))
 	{
