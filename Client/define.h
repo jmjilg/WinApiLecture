@@ -36,8 +36,8 @@ enum class GROUP_TYPE
 {
 	DEFAULT, // 0
 	TILE,	 
-	PLAYER, 
 	MONSTER,
+	PLAYER, 
 	PROJ_PLAYER, 
 	PROJ_MONSTER, 
 

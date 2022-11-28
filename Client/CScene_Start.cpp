@@ -83,7 +83,7 @@ void CScene_Start::Enter()
 	}
 
 	// 타일 로딩
-	LoadTile(L"Tile\\Start.tile");
+	//LoadTile(L"Tile\\Start.tile");				
 
 	// 충돌 지정
 	// Player 그룹과 Monster 그룹 간의 충돌체크
