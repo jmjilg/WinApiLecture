@@ -116,3 +116,4 @@ void CCore::CreateBrushPen()
 
 }
 
+// 강의에서 이론 설명만 했으므로 코드는 바뀐게 없음
