@@ -115,5 +115,3 @@ void CCore::CreateBrushPen()
 	m_arrPen[(UINT)PEN_TYPE::BLUE] = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
 
 }
-
-// 강의에서 이론 설명만 했으므로 코드는 바뀐게 없음
