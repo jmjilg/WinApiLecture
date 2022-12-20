@@ -17,6 +17,10 @@
 #include "CSceneMgr.h"
 #include "CCamera.h"
 
+#include "AI.h"
+#include "CIdleState.h"
+#include "CTraceState.h"
+
 CScene_Start::CScene_Start()
 {
 
@@ -60,25 +64,25 @@ void CScene_Start::Enter()
 	//CCamera::GetInst()->SetTarget(pObj);
 
 	// 몬스터 배치
-	int iMonCount = 2;
-	float fMoveDist = 25.f;
+	int iMonCount = 1;
 	float fObjScale = 50.f;
 
 	Vec2 vResolution = CCore::GetInst()->GetResolution();
-	float fTerm = (vResolution.x - ((fMoveDist + fObjScale / 2.f) * 2)) / (float)(iMonCount - 1);
+
+	AI* pAI = new AI;
+	pAI->AddState(new CIdleState);
+	pAI->AddState(new CTraceState);
 
 	CMonster* pMonsterObj = nullptr;
-
 	for (int i = 0; i < iMonCount; ++i)
 	{
 		// Monster Object 추가
 		pMonsterObj = new CMonster;
 		pMonsterObj->SetName(L"Monster");
-		pMonsterObj->SetPos(Vec2((fMoveDist + fObjScale / 2.f) + (float)i * fTerm, 50.f));
-		pMonsterObj->SetCenterPos(pMonsterObj->GetPos());
-
-		pMonsterObj->SetMoveDistance(fMoveDist);
 		pMonsterObj->SetScale(Vec2(fObjScale, fObjScale));
+		pMonsterObj->SetPos(vResolution / 2.f - Vec2(0.f, 300.f));
+		pMonsterObj->SetAI(pAI);
+
 		AddObject(pMonsterObj, GROUP_TYPE::MONSTER);
 	}
 

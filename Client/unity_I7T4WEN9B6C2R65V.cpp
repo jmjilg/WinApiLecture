@@ -1,4 +1,7 @@
 
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\AI.cpp"
+
+
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CAnimation.cpp"
 
 

@@ -32,9 +32,6 @@
     <Filter Include="Engine\04. Object">
       <UniqueIdentifier>{7fe9ca32-a0ef-4fe2-a78b-9fa1f46175b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\05. Scene\NewFilter3">
-      <UniqueIdentifier>{079f4d02-d002-4917-a531-62f18611a36c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\03. Manager\SceneMgr">
       <UniqueIdentifier>{038ad908-a421-4fde-b456-ed191b393ea4}</UniqueIdentifier>
     </Filter>
@@ -43,9 +40,6 @@
     </Filter>
     <Filter Include="Engine\05. Scene\Scene_Tool">
       <UniqueIdentifier>{34b66c44-64d8-4b5c-be17-687f1eacdede}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\04. Object\CMonster">
-      <UniqueIdentifier>{592c0fa1-7bd6-439a-b634-fdb7328efa70}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\04. Object\Missile">
       <UniqueIdentifier>{4805984e-dc3d-420a-b413-59f4fd2fcb6f}</UniqueIdentifier>
@@ -107,6 +101,27 @@
     <Filter Include="Engine\04. Object\UI\BtnUI">
       <UniqueIdentifier>{b61a2a95-71ef-4fb6-9d18-7d27aec9923d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\08. Module\AI">
+      <UniqueIdentifier>{72e52e5d-6781-442d-ba7d-57e2d7e28f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04. Object\Monster">
+      <UniqueIdentifier>{592c0fa1-7bd6-439a-b634-fdb7328efa70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State">
+      <UniqueIdentifier>{a01a073b-27c0-4863-9bd6-9b7a69cacd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State\Trace">
+      <UniqueIdentifier>{1c088e7e-7184-49ca-91fa-dc9f196c7d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State\Attack">
+      <UniqueIdentifier>{c0a1268d-87a1-43c9-8fb7-49b5d55e67b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State\Dead">
+      <UniqueIdentifier>{f12e87e5-8f9b-4787-aacb-0156b932ffd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08. Module\AI\State\Idle">
+      <UniqueIdentifier>{ea58a1bb-6903-4c92-98a3-d0488e5be666}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h">
@@ -153,7 +168,7 @@
       <Filter>Engine\04. Object\Player</Filter>
     </ClInclude>
     <ClInclude Include="CMonster.h">
-      <Filter>Engine\04. Object\CMonster</Filter>
+      <Filter>Engine\04. Object\Monster</Filter>
     </ClInclude>
     <ClInclude Include="CMissile.h">
       <Filter>Engine\04. Object\Missile</Filter>
@@ -218,6 +233,18 @@
     <ClInclude Include="CBtnUI.h">
       <Filter>Engine\04. Object\UI\BtnUI</Filter>
     </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Engine\08. Module\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="CState.h">
+      <Filter>Engine\08. Module\AI\State</Filter>
+    </ClInclude>
+    <ClInclude Include="CIdleState.h">
+      <Filter>Engine\08. Module\AI\State\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="CTraceState.h">
+      <Filter>Engine\08. Module\AI\State\Trace</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -259,7 +286,7 @@
       <Filter>Engine\04. Object\Player</Filter>
     </ClCompile>
     <ClCompile Include="CMonster.cpp">
-      <Filter>Engine\04. Object\CMonster</Filter>
+      <Filter>Engine\04. Object\Monster</Filter>
     </ClCompile>
     <ClCompile Include="CMissile.cpp">
       <Filter>Engine\04. Object\Missile</Filter>
@@ -320,6 +347,18 @@
     </ClCompile>
     <ClCompile Include="CBtnUI.cpp">
       <Filter>Engine\04. Object\UI\BtnUI</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Engine\08. Module\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="CState.cpp">
+      <Filter>Engine\08. Module\AI\State</Filter>
+    </ClCompile>
+    <ClCompile Include="CIdleState.cpp">
+      <Filter>Engine\08. Module\AI\State\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="CTraceState.cpp">
+      <Filter>Engine\08. Module\AI\State\Trace</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

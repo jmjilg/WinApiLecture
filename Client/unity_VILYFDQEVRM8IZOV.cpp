@@ -1,8 +1,8 @@
 
-#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CScene_Tool.cpp"
-
-
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CSound.cpp"
+
+
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CState.cpp"
 
 
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CTexture.cpp"

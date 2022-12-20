@@ -28,3 +28,6 @@
 
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CScene_Start.cpp"
 
+
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CScene_Tool.cpp"
+
