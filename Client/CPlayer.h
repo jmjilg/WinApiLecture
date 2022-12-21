@@ -7,7 +7,7 @@ class CPlayer :
     public CObject
 {
 private:
-    
+    vector<CObject*>    m_vecColObj;
 
 public:
     virtual void update();

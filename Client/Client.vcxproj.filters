@@ -128,6 +128,9 @@
     <Filter Include="Engine\09. Factory\MonFactory">
       <UniqueIdentifier>{e65c8515-be3b-4e2d-9c46-093854ab8b08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\07. Component\RigidBody">
+      <UniqueIdentifier>{58f0b4a9-e119-4262-a9a2-3cb560653933}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CCore.h">
@@ -251,7 +254,12 @@
     <ClInclude Include="CTraceState.h">
       <Filter>Engine\08. Module\AI\State\Trace</Filter>
     </ClInclude>
-    <ClInclude Include="CMonFactory.h" />
+    <ClInclude Include="CRigidBody.h">
+      <Filter>Engine\07. Component\RigidBody</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonFactory.h">
+      <Filter>Engine\09. Factory\MonFactory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc">
@@ -367,6 +375,11 @@
     <ClCompile Include="CTraceState.cpp">
       <Filter>Engine\08. Module\AI\State\Trace</Filter>
     </ClCompile>
-    <ClCompile Include="CMonFactory.cpp" />
+    <ClCompile Include="CRigidBody.cpp">
+      <Filter>Engine\07. Component\RigidBody</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonFactory.cpp">
+      <Filter>Engine\09. Factory\MonFactory</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

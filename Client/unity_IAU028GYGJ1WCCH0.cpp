@@ -23,6 +23,9 @@
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CResMgr.cpp"
 
 
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CRigidBody.cpp"
+
+
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CScene.cpp"
 
 
@@ -30,7 +33,4 @@
 
 
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CScene_Start.cpp"
-
-
-#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CScene_Tool.cpp"
 
