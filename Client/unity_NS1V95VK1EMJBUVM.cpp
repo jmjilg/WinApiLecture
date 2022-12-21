@@ -1,4 +1,7 @@
 
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CMonFactory.cpp"
+
+
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CMonster.cpp"
 
 

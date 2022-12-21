@@ -14,6 +14,9 @@
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CTimeMgr.cpp"
 
 
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CTraceState.cpp"
+
+
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CUI.cpp"
 
 

@@ -36,3 +36,22 @@ CState* AI::GetState(MON_STATE _eState)
 
 	return iter->second;
 }
+
+void AI::SetCurState(MON_STATE _eState)
+{
+	m_pCurState = GetState(_eState);
+	assert(m_pCurState);
+}
+
+void AI::ChangeState(MON_STATE _eNextState)
+{
+	CState* pNextState = GetState(_eNextState);
+
+	assert(m_pCurState != pNextState); // 이 조건식이 실패하면 문제가 되게 함
+
+	m_pCurState->Exit();
+
+	m_pCurState = pNextState;
+
+	m_pCurState->Enter();
+}

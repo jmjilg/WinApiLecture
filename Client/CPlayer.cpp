@@ -99,9 +99,11 @@ void CPlayer::render(HDC _dc)
 	//	, RGB(255, 255, 255));
 
 	// 컴포넌트(충돌체, etc...) 가 있는 경우 렌더
-	//component_render(_dc);
+	component_render(_dc);
 
-	CTexture* pTex = CResMgr::GetInst()->LoadTexture(L"Plane", L"texture\\Player_A.bmp");
+
+	// 알파블렌드 테스트 코드(비행기 스프라이트)
+	/*CTexture* pTex = CResMgr::GetInst()->LoadTexture(L"Plane", L"texture\\Player_A.bmp");
 
 	Vec2 vPos = GetPos();
 	vPos = CCamera::GetInst()->GetRenderPos(vPos);
@@ -123,7 +125,7 @@ void CPlayer::render(HDC _dc)
 		, pTex->GetDC()
 		, 0, 0
 		, int(width), int(height)
-		, bf);
+		, bf);*/
 }
 
 void CPlayer::CreateMissile()

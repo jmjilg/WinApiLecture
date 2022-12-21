@@ -54,6 +54,8 @@ void CScene_Start::Enter()
 	pObj->SetScale(Vec2(100.f, 100.f));
 	AddObject(pObj, GROUP_TYPE::PLAYER);
 
+	RegisterPlayer(pObj);
+
 	/*CObject* pOtherPlayer = new CPlayer(*(CPlayer*)pObj);
 	pOtherPlayer->SetPos(Vec2(740.f, 384.f)); 아래로 바뀜 */
 
@@ -62,29 +64,14 @@ void CScene_Start::Enter()
 	//AddObject(pOtherPlayer, GROUP_TYPE::PLAYER);
 
 	//CCamera::GetInst()->SetTarget(pObj);
-
 	// 몬스터 배치
 	int iMonCount = 1;
 	float fObjScale = 50.f;
 
 	Vec2 vResolution = CCore::GetInst()->GetResolution();
+	CMonster* pMon = CMonFactory::CreateMonster(MON_TYPE::NORMAL, vResolution / 2.f - Vec2(0.f, 300.f));
+	CreateObject(pMon, GROUP_TYPE::MONSTER);
 
-	AI* pAI = new AI;
-	pAI->AddState(new CIdleState);
-	pAI->AddState(new CTraceState);
-
-	CMonster* pMonsterObj = nullptr;
-	for (int i = 0; i < iMonCount; ++i)
-	{
-		// Monster Object 추가
-		pMonsterObj = new CMonster;
-		pMonsterObj->SetName(L"Monster");
-		pMonsterObj->SetScale(Vec2(fObjScale, fObjScale));
-		pMonsterObj->SetPos(vResolution / 2.f - Vec2(0.f, 300.f));
-		pMonsterObj->SetAI(pAI);
-
-		AddObject(pMonsterObj, GROUP_TYPE::MONSTER);
-	}
 
 	// 타일 로딩
 	//LoadTile(L"Tile\\Start.tile");				

@@ -26,6 +26,9 @@
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CEventMgr.cpp"
 
 
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CIdleState.cpp"
+
+
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CKeyMgr.cpp"
 
 
