@@ -113,10 +113,10 @@ void CScene_Start::render(HDC _dc)
 	
 
 	Ellipse(_dc
-		, vRenderPos.x - m_fCurRadius
-		, vRenderPos.y - m_fCurRadius
-		, vRenderPos.x + m_fCurRadius
-		, vRenderPos.y + m_fCurRadius);
+		, (int)(vRenderPos.x - m_fCurRadius)
+		, (int)(vRenderPos.y - m_fCurRadius)
+		, (int)(vRenderPos.x + m_fCurRadius)
+		, (int)(vRenderPos.y + m_fCurRadius));
 
 	
 }
