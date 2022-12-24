@@ -26,11 +26,14 @@
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CEventMgr.cpp"
 
 
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CGravity.cpp"
+
+
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CGround.cpp"
+
+
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CIdleState.cpp"
 
 
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CKeyMgr.cpp"
-
-
-#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CMissile.cpp"
 
