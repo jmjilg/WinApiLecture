@@ -44,6 +44,9 @@ CPlayer::CPlayer()
 
 	GetAnimator()->CreateAnimation(L"WALK_LEFT", pTex, Vec2(19.f, 1331.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 10);
 	GetAnimator()->CreateAnimation(L"WALK_RIGHT", pTex, Vec2(19.f, 1203.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 10);
+	
+	GetAnimator()->CreateAnimation(L"JUMP_LEFT", pTex, Vec2(19.f, 3379.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 9);
+	GetAnimator()->CreateAnimation(L"JUMP_RIGHT", pTex, Vec2(19.f, 3251.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 9);
 
 	CreateGravity();
 }
@@ -61,10 +64,9 @@ void CPlayer::update()
 
 	update_animation();
 
-
-	if (KEY_TAP(KEY::SPACE))
+	if (KEY_TAP(KEY::ENTER))
 	{
-		CreateMissile();
+		SetPos(Vec2(640.f, 384.f));
 	}
 
 	GetAnimator()->update();
@@ -158,6 +160,17 @@ void CPlayer::update_state()
 	{
 		m_eCurState = PLAYER_STATE::IDLE;
 	}
+
+	if (KEY_TAP(KEY::SPACE))
+	{
+		//CreateMissile();
+		m_eCurState = PLAYER_STATE::JUMP;
+
+		if (GetRigidBody())
+		{
+			GetRigidBody()->AddVelocity(Vec2(0.f, -200.f));
+		}
+	}
 }
 
 void CPlayer::update_move()
@@ -210,9 +223,18 @@ void CPlayer::update_animation()
 			GetAnimator()->Play(L"WALK_RIGHT", true);
 	}
 		break;
+
+	case PLAYER_STATE::JUMP:
+		if (m_iDir == -1)
+			GetAnimator()->Play(L"JUMP_LEFT", true);
+		else
+			GetAnimator()->Play(L"JUMP_RIGHT", true);
+		break;
+
 	case PLAYER_STATE::ATTACK:
 
 		break;
+
 	case PLAYER_STATE::DEAD:
 
 		break;

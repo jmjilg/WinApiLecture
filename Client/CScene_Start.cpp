@@ -82,10 +82,10 @@ void CScene_Start::update()
 
 
 
-	if (KEY_TAP(KEY::ENTER))
+	/*if (KEY_TAP(KEY::ENTER))
 	{
 		ChangeScene(SCENE_TYPE::TOOL);
-	}
+	}*/
 
 	// 클릭시 카메라 움직임
 	//if (KEY_TAP(KEY::LBTN))

@@ -22,7 +22,7 @@ void CGravity::SetGround(bool _b)
 		m_pOwner->GetRigidBody()->SetVelocity(Vec2(vV.x, 0.f));
 	}
 }
-
+ 
 void CGravity::finalupdate()
 {
 	m_pOwner->GetRigidBody()->SetAccelAlpha(Vec2(0.f, 800.f));

@@ -9,7 +9,7 @@ CRigidBody::CRigidBody()
 	: m_pOwner(nullptr)
 	, m_fMass(1.f)
 	, m_fFricCoeff(100.f)
-	, m_fMaxSpeed(200.f)
+	, m_vMaxVelocity(Vec2(200.f, 600.f))
 {
 }
 
@@ -59,11 +59,16 @@ void CRigidBody::finalupdate()
 		}
 	}
 
-	// 속도 제한 검사
-	if (m_fMaxSpeed < m_vVelocity.Length())
+	// 속도 제한 검사 (x축)
+	if (abs(m_vMaxVelocity.x) < abs(m_vVelocity.x))
 	{
-		m_vVelocity.Normalize();
-		m_vVelocity *= m_fMaxSpeed;
+		m_vVelocity.x = (m_vVelocity.x / abs(m_vVelocity.x)) * abs(m_vMaxVelocity.x); // 방향은 유지가 되야함
+	}
+
+	// 속도 제한 검사 (y축)
+	if (abs(m_vMaxVelocity.y) < abs(m_vVelocity.y))
+	{
+		m_vVelocity.y = (m_vVelocity.y / abs(m_vVelocity.y)) * abs(m_vMaxVelocity.y); 
 	}
 
 
