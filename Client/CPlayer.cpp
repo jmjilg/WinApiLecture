@@ -144,19 +144,21 @@ void CPlayer::CreateMissile()
 
 void CPlayer::update_state()
 {
-	if (KEY_TAP(KEY::A))
+	if (KEY_HOLD(KEY::A))
 	{
 		m_iDir = -1;
-		m_eCurState = PLAYER_STATE::WALK;
+		if (PLAYER_STATE::JUMP != m_eCurState)
+			m_eCurState = PLAYER_STATE::WALK;		
 	}
 
-	if (KEY_TAP(KEY::D))
+	if (KEY_HOLD(KEY::D))
 	{
 		m_iDir = 1;
-		m_eCurState = PLAYER_STATE::WALK;
+		if (PLAYER_STATE::JUMP != m_eCurState)
+			m_eCurState = PLAYER_STATE::WALK;
 	}
 
-	if (0.f == GetRigidBody()->GetSpeed())
+	if (0.f == GetRigidBody()->GetSpeed() && PLAYER_STATE::JUMP != m_eCurState)
 	{
 		m_eCurState = PLAYER_STATE::IDLE;
 	}
@@ -167,8 +169,8 @@ void CPlayer::update_state()
 		m_eCurState = PLAYER_STATE::JUMP;
 
 		if (GetRigidBody())
-		{
-			GetRigidBody()->AddVelocity(Vec2(0.f, -200.f));
+		{			
+			GetRigidBody()->SetVelocity(Vec2(GetRigidBody()->GetVelocity().x, -300.f));
 		}
 	}
 }
@@ -188,13 +190,13 @@ void CPlayer::update_move()
 	}
 
 	if (KEY_TAP(KEY::A))
-	{
-		pRigid->AddVelocity(Vec2(-100.f, 0.f));
+	{		
+		pRigid->SetVelocity(Vec2(-100.f, pRigid->GetVelocity().y));
 	}
 
 	if (KEY_TAP(KEY::D))
 	{
-		pRigid->AddVelocity(Vec2(100.f, 0.f));
+		pRigid->SetVelocity(Vec2(100.f, pRigid->GetVelocity().y));
 	}
 }
 
@@ -244,4 +246,17 @@ void CPlayer::update_animation()
 void CPlayer::update_gravity()
 {
 	GetRigidBody()->AddForce(Vec2(0.f, 500.f));
+}
+
+void CPlayer::OnCollisionEnter(CCollider* _pOther)
+{
+	CObject* pOtherObj = _pOther->GetObj();
+	if (L"Ground" == _pOther->GetObj()->GetName())
+	{
+		Vec2 vPos = GetPos();
+		if (vPos.y < pOtherObj->GetPos().y)
+		{
+			m_eCurState = PLAYER_STATE::IDLE;
+		}
+	}
 }
