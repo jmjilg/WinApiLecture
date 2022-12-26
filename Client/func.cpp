@@ -41,9 +41,8 @@ void ChangeAIState(AI* _pAI, MON_STATE _eNextState)
 	CEventMgr::GetInst()->AddEvent(evn);
 }
 
-void SaveWstring(const wstring& _str, FILE* _pFile)
+void SaveWString(const wstring& _str, FILE* _pFile)
 {
-
 	const wchar_t* pStrName = _str.c_str();
 	size_t iLen = _str.length();
 
