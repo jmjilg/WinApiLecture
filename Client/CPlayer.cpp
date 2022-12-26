@@ -39,14 +39,30 @@ CPlayer::CPlayer()
 	//CTexture* pRightTex = CResMgr::GetInst()->LoadTexture(L"PlayerRight", L"texture\\Player01_R.bmp");
 
 	CreateAnimator();	
-	GetAnimator()->CreateAnimation(L"IDLE_RIGHT", pTex, Vec2(19.f, 179.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 4);
+
+	/*GetAnimator()->LoadAnimation(L"animation\\player_idle_left.anim");
+	GetAnimator()->LoadAnimation(L"animation\\player_idle_right.anim");
+	GetAnimator()->LoadAnimation(L"animation\\player_walk_left.anim");
+	GetAnimator()->LoadAnimation(L"animation\\player_walk_right.anim");
+	GetAnimator()->LoadAnimation(L"animation\\player_jump_left.anim");
+	GetAnimator()->LoadAnimation(L"animation\\player_jump_right.anim");*/
+
 	GetAnimator()->CreateAnimation(L"IDLE_LEFT", pTex, Vec2(19.f, 307.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 4);
+	GetAnimator()->CreateAnimation(L"IDLE_RIGHT", pTex, Vec2(19.f, 179.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 4);
 
 	GetAnimator()->CreateAnimation(L"WALK_LEFT", pTex, Vec2(19.f, 1331.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 10);
 	GetAnimator()->CreateAnimation(L"WALK_RIGHT", pTex, Vec2(19.f, 1203.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 10);
 	
 	GetAnimator()->CreateAnimation(L"JUMP_LEFT", pTex, Vec2(19.f, 3379.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 9);
 	GetAnimator()->CreateAnimation(L"JUMP_RIGHT", pTex, Vec2(19.f, 3251.f), Vec2(80.f, 80.f), Vec2(96.f, 0.f), 0.1f, 9);
+
+	// Animation 저장해보기
+	GetAnimator()->FindAnimation(L"IDLE_LEFT")->Save(L"animation\\player_idle_left.anim");
+	GetAnimator()->FindAnimation(L"IDLE_RIGHT")->Save(L"animation\\player_idle_right.anim");
+	GetAnimator()->FindAnimation(L"WALK_LEFT")->Save(L"animation\\player_walk_left.anim");
+	GetAnimator()->FindAnimation(L"WALK_RIGHT")->Save(L"animation\\player_walk_right.anim");
+	GetAnimator()->FindAnimation(L"JUMP_LEFT")->Save(L"animation\\player_jump_left.anim");
+	GetAnimator()->FindAnimation(L"JUMP_RIGHT")->Save(L"animation\\player_jump_right.anim");
 
 	CreateGravity();
 }
