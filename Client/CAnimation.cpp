@@ -99,7 +99,7 @@ void CAnimation::Save(const wstring& _strRelativePath)
 	assert(pFile);
 
 	// Animation 의 이름을 저장한다.(데이터 직렬화)_
-	fprintf(pFile, "[Aimation Name]\n");
+	fprintf(pFile, "[Animation Name]\n");
 	string strName = string(m_strName.begin(), m_strName.end());
 	fprintf(pFile, strName.c_str());
 	fprintf(pFile, "\n");
@@ -121,7 +121,7 @@ void CAnimation::Save(const wstring& _strRelativePath)
 
 	// 프레임 개수
 	fprintf(pFile, "[Frame Count]\n");
-	fprintf(pFile, "%d\n", m_vecFrm.size());
+	fprintf(pFile, "%d\n", (int)m_vecFrm.size());
 
 
 	// 모든 프레임 정보
@@ -130,14 +130,14 @@ void CAnimation::Save(const wstring& _strRelativePath)
 		fprintf(pFile, "[Frame Index]\n");
 		fprintf(pFile, "%d\n", (int)i);
 
-		fprintf(pFile, "[LEFT Top]\n");
-		fprintf(pFile, "%d, %d\n", (int)m_vecFrm[i].vLT.x, (int)m_vecFrm[i].vLT.y);
+		fprintf(pFile, "[Left Top]\n");
+		fprintf(pFile, "%d %d\n", (int)m_vecFrm[i].vLT.x, (int)m_vecFrm[i].vLT.y);
 
-		fprintf(pFile, "[Slice Top]\n");
-		fprintf(pFile, "%d, %d\n", (int)m_vecFrm[i].vSlice.x, (int)m_vecFrm[i].vSlice.y);
+		fprintf(pFile, "[Slice Size]\n");
+		fprintf(pFile, "%d %d\n", (int)m_vecFrm[i].vSlice.x, (int)m_vecFrm[i].vSlice.y);
 
-		fprintf(pFile, "[Offset Top]\n");
-		fprintf(pFile, "%d, %d\n", (int)m_vecFrm[i].vOffset.x, (int)m_vecFrm[i].vOffset.y);
+		fprintf(pFile, "[Offset]\n");
+		fprintf(pFile, "%d %d\n", (int)m_vecFrm[i].vOffset.x, (int)m_vecFrm[i].vOffset.y);
 
 		fprintf(pFile, "[Duration]\n");
 		fprintf(pFile, "%f\n", m_vecFrm[i].fDuration);
@@ -163,22 +163,82 @@ void CAnimation::Load(const wstring& _strRelativePath)
 	_wfopen_s(&pFile, strFilePath.c_str(), L"rb");
 	assert(pFile);
 
-	// Animation 이름 읽기
-	LoadWString(m_strName, pFile);	
+	// Animation 의 이름을 읽어온다.
+	string str;
+	char szBuff[256] = {};	
 
-	// 텍스쳐
-	wstring strTextKey, strTexPath;
-	LoadWString(strTextKey, pFile);
-	LoadWString(strTexPath, pFile);
-	m_pTex = CResMgr::GetInst()->LoadTexture(strTextKey, strTexPath);
+	FScanf(szBuff, pFile);
+	FScanf(szBuff, pFile);
+	str = szBuff;
+
+	m_strName = wstring(str.begin(), str.end());
+
+	// 참조하는 텍스쳐 이름 및 경로
+	FScanf(szBuff, pFile);
+	FScanf(szBuff, pFile);
+
+	str = szBuff;
+	wstring strTexKey = wstring(str.begin(), str.end());
+
+	FScanf(szBuff, pFile);
+	FScanf(szBuff, pFile);
+
+	str = szBuff;
+	wstring strTexPath = wstring(str.begin(), str.end());
+
+	m_pTex = CResMgr::GetInst()->LoadTexture(strTexKey, strTexPath);
+
+
 
 	// 프레임 개수
-	size_t iFrameCount = 0;
-	fread(&iFrameCount, sizeof(size_t), 1, pFile);
+	FScanf(szBuff, pFile);
+	int iFrameCount = 0;
+	fscanf_s(pFile, "%d", &iFrameCount);
 
 	// 모든 프레임 정보
-	m_vecFrm.resize(iFrameCount);
-	fread(m_vecFrm.data(), sizeof(tAnimFrm), iFrameCount, pFile);
+	tAnimFrm frm = {};
+	for (int i = 0; i < iFrameCount; ++i)
+	{
+		while (true)
+		{
+			POINT pt = {};
+
+			FScanf(szBuff, pFile);
+
+			if (!strcmp("[Frame Index]", szBuff))
+			{
+				fscanf_s(pFile, "%d", &pt.x);
+			}
+			else if (!strcmp("[Left Top]", szBuff))
+			{
+				fscanf_s(pFile, "%d", &pt.x);
+				fscanf_s(pFile, "%d", &pt.y);
+
+				frm.vLT = pt;
+			}
+			else if (!strcmp("[Slice Size]", szBuff))
+			{
+				fscanf_s(pFile, "%d", &pt.x);
+				fscanf_s(pFile, "%d", &pt.y);
+
+				frm.vSlice = pt;
+			}
+			else if (!strcmp("[Offset]", szBuff))
+			{
+				fscanf_s(pFile, "%d", &pt.x);
+				fscanf_s(pFile, "%d", &pt.y);
+
+				frm.vOffset = pt;
+			}
+			else if (!strcmp("[Duration]", szBuff))
+			{
+				fscanf_s(pFile, "%f", &frm.fDuration);
+				break;
+			}
+		}
+
+		m_vecFrm.push_back(frm);
+	}
 
 	fclose(pFile);
 }
