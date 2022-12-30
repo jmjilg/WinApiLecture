@@ -9,6 +9,9 @@
 #include "CEventMgr.h"
 #include "CCamera.h"
 #include "CUIMgr.h"
+#include "CResMgr.h"
+#include "CSound.h"
+#include "CSoundMgr.h"
 
 #include "CTexture.h"
 #include "CResMgr.h"
@@ -64,16 +67,17 @@ int CCore::Init(HWND _hWnd, POINT _ptResolution)
 	CKeyMgr::GetInst()->init();
 	CCamera::GetInst()->init();
 	CSceneMgr::GetInst()->init();
+	CSoundMgr::GetInst()->init();
 
 	// Sound 로드 테스트
-	//CResMgr::GetInst()->LoadSound(L"BGM_01", L"sound\\DM.wav");
-	//CSound* pNewSound = CResMgr::GetInst()->FindSound(L"BGM_01");
+	CResMgr::GetInst()->LoadSound(L"BGM_01", L"sound\\sm01.wav");
+	CSound* pNewSound = CResMgr::GetInst()->FindSound(L"BGM_01");
 
-	//pNewSound->Play();
+	pNewSound->Play(); // 인자로 true를 주면 반복재생
 
-	//pNewSound->SetPosition(50.f); // 백분률, 소리 위치 설정
-	//pNewSound->PlayToBGM(true);
-	//pNewSound->SetVolume(60.f);
+	pNewSound->SetPosition(50.f); // 백분률, 소리 위치 설정
+	pNewSound->PlayToBGM(true); // 인자로 true를 주면 반복재생
+	pNewSound->SetVolume(60.f);
 
 	return S_OK;
 }

@@ -1,4 +1,13 @@
 
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CGround.cpp"
+
+
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CIdleState.cpp"
+
+
+#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CKeyMgr.cpp"
+
+
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CMissile.cpp"
 
 
@@ -18,22 +27,4 @@
 
 
 #include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CPlayer.cpp"
-
-
-#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CRes.cpp"
-
-
-#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CResMgr.cpp"
-
-
-#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CRigidBody.cpp"
-
-
-#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CScene.cpp"
-
-
-#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CSceneMgr.cpp"
-
-
-#include "C:\Users\fptcm\source\repos\WinApiLecture\Client\CScene_Start.cpp"
 
